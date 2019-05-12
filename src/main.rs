@@ -48,8 +48,9 @@ fn main() {
     let sys = actix::System::new("plutonio");
     let app = PlutonioApp::new();
     account::create_account(&app, account::NewAccount {
-        title: "TEst3".to_string(),
+        title: "TEst34".to_string(),
         currency: "RUB".to_string(),
+        balance: Some(100),
     });
 
     let _ = sys.run();

@@ -5,6 +5,7 @@ pub struct Account {
     pub id: i32,
     pub title: String,
     pub currency: String,
+    pub balance: i32,
 }
 
 #[derive(Debug, Insertable)]
@@ -12,4 +13,5 @@ pub struct Account {
 pub struct NewAccount {
     pub title: String,
     pub currency: String,
+    pub balance: Option<i32>,
 }

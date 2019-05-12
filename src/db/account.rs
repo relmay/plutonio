@@ -10,12 +10,14 @@ use super::{DbExecutor, SqliteConnection};
 pub struct CreateAccount {
     pub title: String,
     pub currency: String,
+    pub balance: Option<i32>,
 }
 impl From<CreateAccount> for NewAccount {
     fn from(from: CreateAccount) -> NewAccount {
         NewAccount {
             title: from.title,
             currency: from.currency,
+            balance: from.balance,
         }
     }
 }

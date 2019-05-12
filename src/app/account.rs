@@ -10,12 +10,14 @@ use std::rc::Rc;
 pub struct NewAccount {
     pub title: String,
     pub currency: String,
+    pub balance: Option<i32>,
 }
 impl From<NewAccount> for CreateAccount {
     fn from(from: NewAccount) -> CreateAccount {
         CreateAccount {
             title: from.title,
             currency: from.currency,
+            balance: from.balance,
         }
     }
 }
