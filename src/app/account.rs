@@ -5,9 +5,8 @@ use futures::Future;
 use crate::db::account::CreateAccount;
 
 use super::PlutonioApp;
+use std::rc::Rc;
 
-#[derive(Message)]
-#[rtype(result = "Result<(), DieselError>")]
 pub struct NewAccount {
     pub title: String,
     pub currency: String,
@@ -20,12 +19,7 @@ impl From<NewAccount> for CreateAccount {
         }
     }
 }
-impl Handler<NewAccount> for PlutonioApp {
-    type Result = Result<(), DieselError>;
 
-    fn handle(&mut self, msg: NewAccount, ctx: &mut Self::Context) -> Self::Result {
-        self.db.do_send(CreateAccount::from(msg));
-
-        Ok(())
-    }
+pub fn create_account(app: &PlutonioApp, account: NewAccount) {
+    app.db.do_send(CreateAccount::from(account));
 }

@@ -17,7 +17,13 @@ mod schema;
 
 use clap::{App, Arg, SubCommand};
 
-use crate::app::PlutonioApp;
+use crate::{
+    app::{
+        PlutonioApp,
+        account,
+    },
+
+};
 
 fn main() {
     let matches = App::new("Plutonio")
@@ -41,9 +47,10 @@ fn main() {
 
     let sys = actix::System::new("plutonio");
     let app = PlutonioApp::new();
-    app.do_send(app::account::NewAccount {
-        title: "Test2".to_string(),
+    account::create_account(&app, account::NewAccount {
+        title: "TEst3".to_string(),
         currency: "RUB".to_string(),
     });
+
     let _ = sys.run();
 }
