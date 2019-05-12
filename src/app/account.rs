@@ -7,6 +7,7 @@ use crate::db::account::CreateAccount;
 use super::PlutonioApp;
 use std::rc::Rc;
 
+// TODO: Change balance type to f32 and take it in a full currency.
 pub struct NewAccount {
     pub title: String,
     pub currency: String,

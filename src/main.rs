@@ -9,10 +9,10 @@ extern crate actix;
 #[macro_use]
 extern crate diesel_migrations;
 
-mod app;
-mod conf;
-mod db;
-mod model;
+pub mod app;
+pub mod conf;
+pub mod db;
+pub mod model;
 mod schema;
 
 use clap::{App, Arg, SubCommand};
