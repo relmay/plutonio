@@ -4,14 +4,20 @@ extern crate diesel;
 extern crate serde;
 #[macro_use]
 extern crate smart_default;
+#[macro_use]
+extern crate actix;
+#[macro_use]
+extern crate diesel_migrations;
 
 mod app;
-mod db;
 mod conf;
+mod db;
 mod model;
 mod schema;
 
 use clap::{App, Arg, SubCommand};
+
+use crate::app::PlutonioApp;
 
 fn main() {
     let matches = App::new("Plutonio")
@@ -31,6 +37,13 @@ fn main() {
                 .about("Control your budget."),
         )
         .subcommand(SubCommand::with_name("account").about("Control your accounts."))
-
         .get_matches();
+
+    let sys = actix::System::new("plutonio");
+    let app = PlutonioApp::new();
+    app.do_send(app::account::NewAccount {
+        title: "Test2".to_string(),
+        currency: "RUB".to_string(),
+    });
+    let _ = sys.run();
 }
